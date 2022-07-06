@@ -125,7 +125,7 @@ class Game extends React.Component<IGameProps, IGameStates> {
                 <div className="description">
                     <p>遊戲方法：</p>
                     <p>
-                        點擊任一位置佔領區塊，將代表自己的代號連成一條線即可獲勝。
+                        玩家交替點擊任一位置佔領區塊，將代表自己的代號連成一條線即可獲勝。
                     </p>
                     <p>
                         橫線、直線、斜線皆可獲勝
