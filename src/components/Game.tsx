@@ -51,6 +51,17 @@ class Game extends React.Component<IGameProps, IGameStates> {
         });
     }
 
+    restartGame() {
+        console.log('restart')
+        this.setState({
+            history: [{
+                squares: Array(9).fill(null)
+            }],
+            stepNumber: 0,
+            xIsNext: true
+        })
+    }
+
     // Check win or lose
     calculateWinner(squares: any) {
         const lines = [
@@ -92,21 +103,46 @@ class Game extends React.Component<IGameProps, IGameStates> {
 
         let status;
 
-        if (winner)
-            status = `Winner: ${winner}`
+        if (winner) {
+
+            // status = `Winner: ${winner}`
+
+            status =
+                <div className="winner">
+                    <span className="win-blue">Winner </span>
+                    <span className="win-red">{winner}</span>
+                </div>
+        }
         else
-            status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`
+            status = <div className="winner">Next player: {this.state.xIsNext ? 'X' : 'O'}</div>
 
         return (
-            <div className="game">
-                <div className="game-board">
-                    <Board squares={current.squares}
-                        onClick={(i: any) => this.handleClick(i)} />
+            <div>
+                <div className="game-title">
+                    <h1>Tic Tac Toe</h1>
                 </div>
+
+                <div className="description">
+                    <p>遊戲方法：</p>
+                    <p>
+                        點擊任一位置佔領區塊，將代表自己的代號連成一條線即可獲勝。
+                    </p>
+                    <p>
+                        橫線、直線、斜線皆可獲勝
+                    </p>
+                    {/* <p>遊戲目標：將所持的代號連成一條線即獲勝</p> */}
+                </div>
+
+                <Board squares={current.squares}
+                    onClick={(i: any) => this.handleClick(i)} />
+
                 <div className="game-info">
-                    <div>{status}</div>
-                    <ol>{moves}</ol>
+                    {/* <div>{status}</div> */}
+                    {status}
+                    {/* <ol>{moves}</ol> */}
                 </div>
+
+                <button onClick={() => this.restartGame()} className="new-button">New Game</button>
             </div>
         )
     }

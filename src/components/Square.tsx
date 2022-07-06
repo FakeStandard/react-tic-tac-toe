@@ -27,11 +27,14 @@
 import './Square.css'
 
 function Square(props: any) {
+    const border_style = props.index % 2 == 0 ? `square border${props.index}` : `square`
+
+    console.log(border_style)
+
     return (
-        <button className="square"
-            onClick={props.onClick}>
+        <td className={border_style} onClick={props.onClick}>
             {props.value}
-        </button>
+        </td>
     )
 }
 
